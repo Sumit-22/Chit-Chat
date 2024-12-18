@@ -65,6 +65,9 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.storage)
+
+    implementation ("com.google.firebase:firebase-appcheck-playintegrity:17.1.0")
+    implementation ("com.google.android.gms:play-services-auth:20.2.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

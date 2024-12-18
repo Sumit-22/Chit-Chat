@@ -5,14 +5,15 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,11 +22,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,6 +37,8 @@ import com.example.chatsphere.DestinationScreen
 import com.example.chatsphere.LCViewModel
 import com.example.chatsphere.R
 import com.example.chatsphere.navigateToScreen
+import com.example.chatsphere.ui.theme.purple
+import com.example.chatsphere.ui.theme.white
 
 @Composable
 fun SignUpScreen( navController: NavController, vm: LCViewModel) {
@@ -67,7 +70,7 @@ fun SignUpScreen( navController: NavController, vm: LCViewModel) {
             val focus = LocalFocusManager.current
             Image(painter =
             painterResource(id = R.drawable.ic_sendlogo),
-                contentDescription = "null",
+                contentDescription = "logo",
                 modifier = Modifier
                     .width(200.dp)
                     .padding(top = 16.dp)
@@ -85,15 +88,17 @@ fun SignUpScreen( navController: NavController, vm: LCViewModel) {
                 onValueChange ={
                     nameState.value=it
             },
-                label = {Text(text = "Name")},
-                modifier = Modifier.padding(8.dp)
+                label = {Text(text = "Name", color = purple)},
+                modifier = Modifier.padding(8.dp),
+
             )
             OutlinedTextField(
                 value = numberState.value,
                 onValueChange ={
                     numberState.value=it
             },
-                label = {Text(text = "Contact")} ,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+                label = {Text(text = "Contact", color = purple)} ,
                 modifier = Modifier.padding(8.dp)
             )
             OutlinedTextField(
@@ -101,7 +106,7 @@ fun SignUpScreen( navController: NavController, vm: LCViewModel) {
                 onValueChange ={
                     emailState.value=it
                 },
-                label = {Text(text = "Email")} ,
+                label = {Text(text = "Email", color = purple)} ,
                 modifier = Modifier.padding(8.dp)
             )
             OutlinedTextField(
@@ -109,7 +114,8 @@ fun SignUpScreen( navController: NavController, vm: LCViewModel) {
                 onValueChange ={
                     passwordState.value=it
                 },
-                label = {Text(text = "Password")} ,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                label = {Text(text = "Password", color = purple)} ,
                 modifier = Modifier.padding(8.dp)
             )
             Button(onClick={vm.signUp(
@@ -120,14 +126,17 @@ fun SignUpScreen( navController: NavController, vm: LCViewModel) {
 
             )
 
-            },
+            },colors = ButtonDefaults.buttonColors(
+                containerColor = purple, // Background color
+                contentColor = white // Text/Icon color
+            ),
                 modifier = Modifier.padding(8.dp)
             )
             {
                 Text(text = " SIGN UP ")
             }
             Text(text = "Already a User ? Go to login - >" ,
-                color = Color.Blue,
+                color = purple,
                 modifier = Modifier
                     .padding(8.dp)
                     .clickable {

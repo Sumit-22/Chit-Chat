@@ -17,6 +17,8 @@ import com.example.chatsphere.Screens.ChatListScreen
 import com.example.chatsphere.Screens.LoginScreen
 import com.example.chatsphere.Screens.ProfileScreen
 import com.example.chatsphere.Screens.SignUpScreen
+import com.example.chatsphere.Screens.SingleChatScreen
+import com.example.chatsphere.Screens.SingleStatusScreen
 import com.example.chatsphere.Screens.StatusScreen
 import com.example.chatsphere.ui.theme.ChatSphereTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +30,7 @@ sealed class DestinationScreen(var route:String){
         object Profile :DestinationScreen("profile")
         object ChatList :DestinationScreen("chatList")
         object SingleChat :DestinationScreen("singleChat/{chatId}"){
-            fun createRoute(chatId:String) = "singl eChat/$chatId"
+            fun createRoute(chatId:String) = "singleChat/$chatId"
         }
         object StatusList :DestinationScreen("statusList")
         object SingleStatus :DestinationScreen("singleStatus/{userId}"){
@@ -72,11 +74,23 @@ fun AppNavigation() {
         composable(DestinationScreen.ChatList.route){
             ChatListScreen(navController =navController,vm= vm)
         }
+        composable(DestinationScreen.SingleChat.route){
+            val chatid = it.arguments?.getString("chatId")//"/singleChat/{chatId}" from this ,chatId is a dynamic argument that will be passed when navigating to this screen.It could be an ID used to retrieve the chat data from the database.
+            chatid?.let {
+                SingleChatScreen(navController = navController, vm = vm , ChatId=chatid)
+            }
+        }
         composable(DestinationScreen.StatusList.route){
             StatusScreen(navController =navController,vm= vm)
         }
         composable(DestinationScreen.Profile.route){
             ProfileScreen(navController =navController,vm= vm)
+        }
+        composable(DestinationScreen.SingleStatus.route){
+            val userid = it.arguments?.getString("userId")//why we don't use statusid think??
+            userid?.let {
+                SingleStatusScreen(navController = navController, vm = vm , userId=userid)
+            }
         }
     }
 

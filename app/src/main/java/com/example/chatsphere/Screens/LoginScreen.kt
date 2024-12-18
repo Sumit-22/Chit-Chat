@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -18,11 +19,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,6 +34,7 @@ import com.example.chatsphere.DestinationScreen
 import com.example.chatsphere.LCViewModel
 import com.example.chatsphere.R
 import com.example.chatsphere.navigateToScreen
+import com.example.chatsphere.ui.theme.purple
 
 @Composable
 fun LoginScreen(navController: NavController, vm: LCViewModel) {
@@ -64,8 +66,9 @@ fun LoginScreen(navController: NavController, vm: LCViewModel) {
                     .padding(top = 16.dp)
                     .padding(8.dp)
             )
-            Text(text = " Sign Up",
+            Text(text = " Log In",
                 fontSize = 30.sp,
+                color = purple,
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(8.dp)
@@ -76,7 +79,8 @@ fun LoginScreen(navController: NavController, vm: LCViewModel) {
                 onValueChange ={
                     emailState.value=it
                 },
-                label = {Text(text = "Email")} ,
+                label = {Text(text = "Email",
+                    color = purple)} ,
                 modifier = Modifier.padding(8.dp)
             )
             OutlinedTextField(
@@ -84,7 +88,9 @@ fun LoginScreen(navController: NavController, vm: LCViewModel) {
                 onValueChange ={
                     passwordState.value=it
                 },
-                label = {Text(text = "Password")} ,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                label = {Text(text = "Password",
+                    color = purple)} ,
                 modifier = Modifier.padding(8.dp)
             )
             Button(onClick={
@@ -96,7 +102,7 @@ fun LoginScreen(navController: NavController, vm: LCViewModel) {
                 Text(text = " SIGN In ")
             }
             Text(text = "New User ? Go to Sign Up - >" ,
-                color = Color.Blue,
+                color = purple,
                 modifier = Modifier
                     .padding(8.dp)
                     .clickable {

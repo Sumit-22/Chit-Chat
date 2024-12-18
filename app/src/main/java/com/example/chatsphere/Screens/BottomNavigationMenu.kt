@@ -1,21 +1,19 @@
 package com.example.chatsphere.Screens
 
+import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.chatsphere.DestinationScreen
 import com.example.chatsphere.R
@@ -38,16 +36,16 @@ fun BottomNavigationMenu(
 
         modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight()
-           // .padding(top = 10.dp)
-            .padding(top = 25.dp, bottom= 10.dp, start = 10.dp, end = 10.dp)
-            .background(Color.White)
+            .height(70.dp)
+            .padding(top = 8.dp, bottom= 8.dp, start = 2.dp, end = 2.dp)
+            .background(Color.White),
+        verticalAlignment = Alignment.CenterVertically
 
     ){
 
         for(item in BottomNavigationItem.values()){
             Image(painter = painterResource(id = item.icon),contentDescription = null,
-            modifier = Modifier.size(40.dp).padding(3.dp).weight(1f).clickable{
+            modifier = Modifier.size(40.dp).padding(4.dp).weight(1f).clickable{
                 navigateToScreen(navController,item.navDestination.route)
             }
 //                .graphicsLayer {
